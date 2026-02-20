@@ -1,0 +1,29 @@
+{
+  "name": "read_file",
+  "description": "Read the contents of a file. For images, returns base64-encoded content suitable for vision models. Supports line range selection for large files.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "Absolute path or content URI of the file to read"
+      },
+      "startLine": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Start line number (1-indexed, optional)"
+      },
+      "endLine": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "End line number (1-indexed, optional)"
+      },
+      "encoding": {
+        "type": "string",
+        "default": "utf-8",
+        "description": "File encoding (default: utf-8)"
+      }
+    },
+    "required": ["path"]
+  }
+}

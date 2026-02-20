@@ -1,0 +1,26 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [main]
+    paths: ['ios/**', 'shared/**']
+  pull_request:
+    branches: [main]
+    paths: ['ios/**', 'shared/**']
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
+      - name: Resolve dependencies
+        run: swift package resolve
+        working-directory: ios
+      - name: Build
+        run: swift build
+        working-directory: ios
+      - name: Test
+        run: swift test
+        working-directory: ios

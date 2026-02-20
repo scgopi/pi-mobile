@@ -1,0 +1,33 @@
+{
+  "name": "edit_file",
+  "description": "Make surgical edits to a file using search/replace. Each edit finds an exact text match and replaces it. Fails if a search string is not found or matches multiple locations.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "Absolute path to the file to edit"
+      },
+      "edits": {
+        "type": "array",
+        "description": "List of search/replace operations to apply in order",
+        "items": {
+          "type": "object",
+          "properties": {
+            "search": {
+              "type": "string",
+              "description": "Exact text to find in the file"
+            },
+            "replace": {
+              "type": "string",
+              "description": "Text to replace the found text with"
+            }
+          },
+          "required": ["search", "replace"]
+        },
+        "minItems": 1
+      }
+    },
+    "required": ["path", "edits"]
+  }
+}

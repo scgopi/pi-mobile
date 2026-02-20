@@ -1,0 +1,301 @@
+{
+  "version": "1.0.0",
+  "updated": "2025-06-01T00:00:00Z",
+  "providers": {
+    "openai": {
+      "displayName": "OpenAI",
+      "defaultBaseUrl": "https://api.openai.com",
+      "protocol": "openai-completions",
+      "models": {
+        "gpt-4o": {
+          "name": "GPT-4o",
+          "contextWindow": 128000,
+          "maxOutputTokens": 16384,
+          "inputCostPer1M": 2.50,
+          "outputCostPer1M": 10.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": false }
+        },
+        "gpt-4o-mini": {
+          "name": "GPT-4o Mini",
+          "contextWindow": 128000,
+          "maxOutputTokens": 16384,
+          "inputCostPer1M": 0.15,
+          "outputCostPer1M": 0.60,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": false }
+        },
+        "o1": {
+          "name": "o1",
+          "contextWindow": 200000,
+          "maxOutputTokens": 100000,
+          "inputCostPer1M": 15.00,
+          "outputCostPer1M": 60.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "o1-mini": {
+          "name": "o1-mini",
+          "contextWindow": 128000,
+          "maxOutputTokens": 65536,
+          "inputCostPer1M": 3.00,
+          "outputCostPer1M": 12.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "o3-mini": {
+          "name": "o3-mini",
+          "contextWindow": 200000,
+          "maxOutputTokens": 100000,
+          "inputCostPer1M": 1.10,
+          "outputCostPer1M": 4.40,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "gpt-4-turbo": {
+          "name": "GPT-4 Turbo",
+          "contextWindow": 128000,
+          "maxOutputTokens": 4096,
+          "inputCostPer1M": 10.00,
+          "outputCostPer1M": 30.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": false }
+        }
+      }
+    },
+    "openai-responses": {
+      "displayName": "OpenAI (Responses API)",
+      "defaultBaseUrl": "https://api.openai.com",
+      "protocol": "openai-responses",
+      "models": {
+        "gpt-4o": {
+          "name": "GPT-4o (Responses)",
+          "contextWindow": 128000,
+          "maxOutputTokens": 16384,
+          "inputCostPer1M": 2.50,
+          "outputCostPer1M": 10.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": false }
+        }
+      }
+    },
+    "anthropic": {
+      "displayName": "Anthropic",
+      "defaultBaseUrl": "https://api.anthropic.com",
+      "protocol": "anthropic",
+      "models": {
+        "claude-opus-4-20250514": {
+          "name": "Claude Opus 4",
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000,
+          "inputCostPer1M": 15.00,
+          "outputCostPer1M": 75.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "claude-sonnet-4-20250514": {
+          "name": "Claude Sonnet 4",
+          "contextWindow": 200000,
+          "maxOutputTokens": 16000,
+          "inputCostPer1M": 3.00,
+          "outputCostPer1M": 15.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "claude-haiku-3-5-20241022": {
+          "name": "Claude 3.5 Haiku",
+          "contextWindow": 200000,
+          "maxOutputTokens": 8192,
+          "inputCostPer1M": 0.80,
+          "outputCostPer1M": 4.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": false }
+        }
+      }
+    },
+    "google": {
+      "displayName": "Google",
+      "defaultBaseUrl": "https://generativelanguage.googleapis.com",
+      "protocol": "google",
+      "models": {
+        "gemini-2.5-pro": {
+          "name": "Gemini 2.5 Pro",
+          "contextWindow": 1048576,
+          "maxOutputTokens": 65536,
+          "inputCostPer1M": 1.25,
+          "outputCostPer1M": 10.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "gemini-2.5-flash": {
+          "name": "Gemini 2.5 Flash",
+          "contextWindow": 1048576,
+          "maxOutputTokens": 65536,
+          "inputCostPer1M": 0.15,
+          "outputCostPer1M": 0.60,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "gemini-2.0-flash": {
+          "name": "Gemini 2.0 Flash",
+          "contextWindow": 1048576,
+          "maxOutputTokens": 8192,
+          "inputCostPer1M": 0.10,
+          "outputCostPer1M": 0.40,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": false }
+        }
+      }
+    },
+    "groq": {
+      "displayName": "Groq",
+      "defaultBaseUrl": "https://api.groq.com/openai",
+      "protocol": "openai-completions",
+      "models": {
+        "llama-3.3-70b-versatile": {
+          "name": "Llama 3.3 70B",
+          "contextWindow": 128000,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 0.59,
+          "outputCostPer1M": 0.79,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": false }
+        },
+        "mixtral-8x7b-32768": {
+          "name": "Mixtral 8x7B",
+          "contextWindow": 32768,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 0.24,
+          "outputCostPer1M": 0.24,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": false }
+        }
+      }
+    },
+    "together": {
+      "displayName": "Together AI",
+      "defaultBaseUrl": "https://api.together.xyz",
+      "protocol": "openai-completions",
+      "models": {
+        "meta-llama/Llama-3.3-70B-Instruct-Turbo": {
+          "name": "Llama 3.3 70B Instruct Turbo",
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 0.88,
+          "outputCostPer1M": 0.88,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": false }
+        },
+        "deepseek-ai/DeepSeek-R1": {
+          "name": "DeepSeek R1",
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 3.00,
+          "outputCostPer1M": 7.00,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": true }
+        }
+      }
+    },
+    "cerebras": {
+      "displayName": "Cerebras",
+      "defaultBaseUrl": "https://api.cerebras.ai",
+      "protocol": "openai-completions",
+      "quirks": { "stripFields": ["store"] },
+      "models": {
+        "llama-3.3-70b": {
+          "name": "Llama 3.3 70B",
+          "contextWindow": 128000,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 0.85,
+          "outputCostPer1M": 1.20,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": false }
+        }
+      }
+    },
+    "mistral": {
+      "displayName": "Mistral",
+      "defaultBaseUrl": "https://api.mistral.ai",
+      "protocol": "openai-completions",
+      "quirks": { "renameFields": { "max_completion_tokens": "max_tokens" } },
+      "models": {
+        "mistral-large-latest": {
+          "name": "Mistral Large",
+          "contextWindow": 128000,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 2.00,
+          "outputCostPer1M": 6.00,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": false }
+        },
+        "codestral-latest": {
+          "name": "Codestral",
+          "contextWindow": 256000,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 0.30,
+          "outputCostPer1M": 0.90,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": false }
+        }
+      }
+    },
+    "xai": {
+      "displayName": "xAI",
+      "defaultBaseUrl": "https://api.x.ai",
+      "protocol": "openai-completions",
+      "models": {
+        "grok-2": {
+          "name": "Grok 2",
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "inputCostPer1M": 2.00,
+          "outputCostPer1M": 10.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": false }
+        },
+        "grok-3-mini": {
+          "name": "Grok 3 Mini",
+          "contextWindow": 131072,
+          "maxOutputTokens": 131072,
+          "inputCostPer1M": 0.30,
+          "outputCostPer1M": 0.50,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": true }
+        }
+      }
+    },
+    "azure": {
+      "displayName": "Azure OpenAI",
+      "defaultBaseUrl": "https://{resource}.cognitiveservices.azure.com/openai/responses?api-version=2025-04-01-preview",
+      "protocol": "azure",
+      "models": {
+        "gpt-5.2-chat": {
+          "name": "GPT-5.2 Chat",
+          "contextWindow": 128000,
+          "maxOutputTokens": 16384,
+          "inputCostPer1M": 2.50,
+          "outputCostPer1M": 10.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "gpt-5.2": {
+          "name": "GPT-5.2",
+          "contextWindow": 128000,
+          "maxOutputTokens": 16384,
+          "inputCostPer1M": 2.50,
+          "outputCostPer1M": 10.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        },
+        "kimi-k2.5": {
+          "name": "Kimi K2.5",
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "inputCostPer1M": 1.00,
+          "outputCostPer1M": 4.00,
+          "capabilities": { "vision": true, "toolUse": true, "streaming": true, "reasoning": true }
+        }
+      }
+    },
+    "deepseek": {
+      "displayName": "DeepSeek",
+      "defaultBaseUrl": "https://api.deepseek.com",
+      "protocol": "openai-completions",
+      "models": {
+        "deepseek-chat": {
+          "name": "DeepSeek V3",
+          "contextWindow": 65536,
+          "maxOutputTokens": 8192,
+          "inputCostPer1M": 0.27,
+          "outputCostPer1M": 1.10,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": false }
+        },
+        "deepseek-reasoner": {
+          "name": "DeepSeek R1",
+          "contextWindow": 65536,
+          "maxOutputTokens": 8192,
+          "inputCostPer1M": 0.55,
+          "outputCostPer1M": 2.19,
+          "capabilities": { "vision": false, "toolUse": true, "streaming": true, "reasoning": true }
+        }
+      }
+    }
+  }
+}

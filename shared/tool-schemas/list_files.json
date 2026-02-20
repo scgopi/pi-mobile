@@ -1,0 +1,23 @@
+{
+  "name": "list_files",
+  "description": "List directory contents with optional glob pattern filtering. Returns file names, sizes, modification dates, and types.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "Directory path to list"
+      },
+      "pattern": {
+        "type": "string",
+        "description": "Glob pattern to filter results (e.g., '*.json', '**/*.kt')"
+      },
+      "recursive": {
+        "type": "boolean",
+        "default": false,
+        "description": "Whether to list files recursively"
+      }
+    },
+    "required": ["path"]
+  }
+}

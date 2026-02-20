@@ -1,0 +1,60 @@
+{
+  "name": "media_query",
+  "description": "Search and access photos, videos, audio, and documents on the device. Supports listing media with filters, reading content, and retrieving metadata (EXIF, GPS, dimensions).",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": ["images", "video", "audio", "documents"],
+        "description": "Media type to query"
+      },
+      "filter": {
+        "type": "object",
+        "description": "Filtering criteria",
+        "properties": {
+          "dateAfter": {
+            "type": "string",
+            "description": "ISO date string, return media created after this date"
+          },
+          "dateBefore": {
+            "type": "string",
+            "description": "ISO date string, return media created before this date"
+          },
+          "mimeType": {
+            "type": "string",
+            "description": "Filter by MIME type (e.g., 'image/png')"
+          },
+          "album": {
+            "type": "string",
+            "description": "Album or folder name"
+          },
+          "searchText": {
+            "type": "string",
+            "description": "Search in display name"
+          },
+          "limit": {
+            "type": "integer",
+            "default": 50,
+            "description": "Maximum number of results"
+          },
+          "offset": {
+            "type": "integer",
+            "default": 0,
+            "description": "Number of results to skip"
+          }
+        }
+      },
+      "action": {
+        "type": "string",
+        "enum": ["list", "read", "metadata"],
+        "description": "list=query matching media, read=load content, metadata=detailed info"
+      },
+      "uri": {
+        "type": "string",
+        "description": "Content URI for read/metadata actions (obtained from a prior list action)"
+      }
+    },
+    "required": ["type", "action"]
+  }
+}

@@ -1,0 +1,52 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# iOS / Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.hmap
+*.xccheckout
+*.moved-aside
+*.xcworkspacedata
+!default.xcworkspacedata
+*.xcscmblueprint
+Pods/
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/xcuserdata/
+Package.resolved
+
+# Android / Gradle
+.gradle/
+build/
+local.properties
+*.apk
+*.aab
+*.ap_
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+
+# General
+.env
+.env.*
+*.log
+*.tmp
+*.bak
+*~
+.vscode/
+.fleet/

@@ -1,0 +1,28 @@
+name: Android CI
+
+on:
+  push:
+    branches: [main]
+    paths: ['android/**', 'shared/**']
+  pull_request:
+    branches: [main]
+    paths: ['android/**', 'shared/**']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Build debug
+        run: ./gradlew assembleDebug
+        working-directory: android
+      - name: Run tests
+        run: ./gradlew test
+        working-directory: android

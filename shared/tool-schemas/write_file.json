@@ -1,0 +1,18 @@
+{
+  "name": "write_file",
+  "description": "Create or overwrite a file within the app sandbox. Parent directories are created automatically.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "Absolute path within the app sandbox"
+      },
+      "content": {
+        "type": "string",
+        "description": "File content to write"
+      }
+    },
+    "required": ["path", "content"]
+  }
+}
