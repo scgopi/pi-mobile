@@ -41,8 +41,17 @@ mavenPublishing {
                 url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
             }
         }
+        developers {
+            developer {
+                id.set("scgopi")
+                name.set("scgopi")
+                url.set("https://github.com/scgopi")
+            }
+        }
         scm {
             url.set("https://github.com/scgopi/pi-mobile")
+            connection.set("scm:git:git://github.com/scgopi/pi-mobile.git")
+            developerConnection.set("scm:git:ssh://git@github.com/scgopi/pi-mobile.git")
         }
     }
 }
