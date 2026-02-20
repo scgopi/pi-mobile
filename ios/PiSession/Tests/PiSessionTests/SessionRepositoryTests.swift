@@ -119,7 +119,7 @@ final class SessionRepositoryTests: XCTestCase {
         let updated = try repo.getSession(id: "s1")
         XCTAssertNotNil(updated)
         // The session's updatedAt should have been updated to the entry's createdAt
-        XCTAssertEqual(updated?.updatedAt.timeIntervalSince1970, 5000, accuracy: 1)
+        XCTAssertEqual(updated!.updatedAt.timeIntervalSince1970, 5000.0, accuracy: 1.0)
     }
 
     // MARK: - DAG / Branch Operations

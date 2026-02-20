@@ -331,6 +331,7 @@ public struct MediaQueryTool: Tool, Sendable {
     // MARK: - Read Action
 
     private func executeRead(input: JSONValue) async -> AgentToolResult {
+        #if canImport(UIKit)
         guard let assetId = input["asset_id"]?.stringValue, !assetId.isEmpty else {
             return AgentToolResult(output: "Error: 'asset_id' is required for the 'read' action.", isError: true)
         }
@@ -370,6 +371,9 @@ public struct MediaQueryTool: Tool, Sendable {
             output: "Thumbnail for asset \(assetId) (\(Int(image.size.width))x\(Int(image.size.height)))",
             details: .file(path: "photo://\(assetId)", content: "[base64:\(base64)]", language: nil)
         )
+        #else
+        return AgentToolResult(output: "Error: Thumbnail reading is not available on this platform.", isError: true)
+        #endif
     }
 
     // MARK: - Helper Methods

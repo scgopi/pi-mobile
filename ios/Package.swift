@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "PiMobile",
-    platforms: [.iOS(.v17)],
+    platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         .library(name: "PiAI", targets: ["PiAI"]),
         .library(name: "PiAgentCore", targets: ["PiAgentCore"]),
