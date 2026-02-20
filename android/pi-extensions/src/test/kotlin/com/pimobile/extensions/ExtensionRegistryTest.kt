@@ -4,6 +4,7 @@ import com.pimobile.agent.AgentToolResult
 import com.pimobile.agent.Tool
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import org.junit.Assert.*
 import org.junit.Before
@@ -79,7 +80,7 @@ class ExtensionRegistryTest {
         return object : Tool {
             override val name = toolName
             override val description = "Test tool $toolName"
-            override val parametersSchema = buildJsonObject { put("type", "object") }
+            override val parametersSchema = buildJsonObject { put("type", JsonPrimitive("object")) }
             override suspend fun execute(input: JsonObject) = AgentToolResult("", "ok")
         }
     }
