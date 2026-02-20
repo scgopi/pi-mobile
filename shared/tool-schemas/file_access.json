@@ -1,0 +1,56 @@
+{
+  "name": "file_access",
+  "description": "Access files outside the app sandbox via the system file picker (iCloud Drive, local storage, Google Drive, etc.). Supports picking files/directories, reading, writing, listing, exporting, and managing persistent access grants.",
+  "parameters": {
+    "type": "object",
+    "required": ["action"],
+    "properties": {
+      "action": {
+        "type": "string",
+        "enum": ["pick", "export", "read", "write", "list", "info", "grants", "revoke"],
+        "description": "Action to perform. Required."
+      },
+      "content_types": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "(pick) File types to allow. Friendly names: 'image', 'pdf', 'text', 'video', 'audio', 'folder', 'any', 'json', 'csv', 'archive', 'source_code'. Also accepts MIME types or file extensions. Defaults to ['any']."
+      },
+      "multiple": {
+        "type": "boolean",
+        "description": "(pick) Allow selecting multiple files. Defaults to false."
+      },
+      "bookmark_id": {
+        "type": "string",
+        "description": "(read, write, list, info, revoke) Bookmark ID obtained from a previous 'pick' result."
+      },
+      "path": {
+        "type": "string",
+        "description": "(read, write, info) Relative path within a bookmarked directory. Use file names from 'list' results."
+      },
+      "content": {
+        "type": "string",
+        "description": "(write, export) Text content to write or export as a file."
+      },
+      "filename": {
+        "type": "string",
+        "description": "(export) Suggested filename for the exported file. Defaults to 'export.txt'."
+      },
+      "start_line": {
+        "type": "integer",
+        "description": "(read) Starting line number (1-indexed) for text files. Optional."
+      },
+      "end_line": {
+        "type": "integer",
+        "description": "(read) Ending line number (inclusive) for text files. Optional."
+      },
+      "recursive": {
+        "type": "boolean",
+        "description": "(list) List directory recursively. Defaults to false."
+      },
+      "pattern": {
+        "type": "string",
+        "description": "(list) Glob pattern to filter results (e.g. '*.kt', '**/*.json')."
+      }
+    }
+  }
+}

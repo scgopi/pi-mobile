@@ -1,0 +1,33 @@
+{
+  "name": "http_request",
+  "description": "Make HTTP requests to external APIs and web services. Returns status code, headers, and response body.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "method": {
+        "type": "string",
+        "enum": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+        "description": "HTTP method"
+      },
+      "url": {
+        "type": "string",
+        "description": "Request URL"
+      },
+      "headers": {
+        "type": "object",
+        "description": "Request headers as key-value pairs",
+        "additionalProperties": { "type": "string" }
+      },
+      "body": {
+        "type": "string",
+        "description": "Request body (optional)"
+      },
+      "timeout": {
+        "type": "integer",
+        "default": 30000,
+        "description": "Timeout in milliseconds"
+      }
+    },
+    "required": ["method", "url"]
+  }
+}

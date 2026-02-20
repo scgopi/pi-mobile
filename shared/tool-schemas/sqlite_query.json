@@ -1,0 +1,30 @@
+{
+  "name": "sqlite_query",
+  "description": "Execute SQL queries on SQLite database files. Supports SELECT (returns table data), INSERT/UPDATE/DELETE (returns affected row count), and schema introspection. Uses parameterized queries for safety.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "database": {
+        "type": "string",
+        "description": "Path to the SQLite database file"
+      },
+      "query": {
+        "type": "string",
+        "description": "SQL query to execute (single statement only)"
+      },
+      "params": {
+        "type": "array",
+        "description": "Parameterized query values (optional, use ? placeholders in query)",
+        "items": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "required": ["database", "query"]
+  }
+}

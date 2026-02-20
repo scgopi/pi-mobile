@@ -1,0 +1,27 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [main]
+    paths: ['ios/**', 'shared/**']
+  pull_request:
+    branches: [main]
+    paths: ['ios/**', 'shared/**']
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          xcodebuild -project PiApp/PiApp.xcodeproj \
+            -scheme PiApp \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            build
+        working-directory: ios
+      - name: Test
+        run: swift test
+        working-directory: ios
