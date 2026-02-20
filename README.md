@@ -129,9 +129,9 @@ Then add the specific product targets you need (e.g., `PiAI`, `PiAgentCore`, `Pi
 ### Android (Maven Central)
 
 ```kotlin
-implementation("com.pimobile:pi-ai:1.0.0")
-implementation("com.pimobile:pi-agent-core:1.0.0")
-implementation("com.pimobile:pi-tools:1.0.0")
+implementation("io.github.scgopi:pi-ai:1.0.0")
+implementation("io.github.scgopi:pi-agent-core:1.0.0")
+implementation("io.github.scgopi:pi-tools:1.0.0")
 ```
 
 ## Links
