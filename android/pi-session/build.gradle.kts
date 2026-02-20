@@ -29,7 +29,7 @@ android {
 mavenPublishing {
     publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
     signAllPublications()
-    coordinates("io.github.scgopi", "pi-session", "1.0.0")
+    coordinates("io.github.scgopi", "pi-session", "1.0.1")
 
     pom {
         name.set("PiSession")

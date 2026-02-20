@@ -121,7 +121,7 @@ The individual modules can be consumed independently in your own apps.
 ### iOS (Swift Package Manager)
 
 ```swift
-.package(url: "https://github.com/scgopi/pi-mobile", from: "1.0.0")
+.package(url: "https://github.com/scgopi/pi-mobile", from: "1.0.1")
 ```
 
 Then add the specific product targets you need (e.g., `PiAI`, `PiAgentCore`, `PiTools`).
@@ -129,9 +129,9 @@ Then add the specific product targets you need (e.g., `PiAI`, `PiAgentCore`, `Pi
 ### Android (Maven Central)
 
 ```kotlin
-implementation("io.github.scgopi:pi-ai:1.0.0")
-implementation("io.github.scgopi:pi-agent-core:1.0.0")
-implementation("io.github.scgopi:pi-tools:1.0.0")
+implementation("io.github.scgopi:pi-ai:1.0.1")
+implementation("io.github.scgopi:pi-agent-core:1.0.1")
+implementation("io.github.scgopi:pi-tools:1.0.1")
 ```
 
 ## Links
