@@ -28,7 +28,7 @@ android {
 mavenPublishing {
     publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
     signAllPublications()
-    coordinates("com.pimobile", "pi-agent-core", "1.0.0")
+    coordinates("io.github.scgopi", "pi-agent-core", "1.0.0")
 
     pom {
         name.set("PiAgentCore")
