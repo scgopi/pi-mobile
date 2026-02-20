@@ -24,9 +24,14 @@ jobs:
         working-directory: ios
       - name: Test
         run: |
-          xcodebuild -project PiApp/PiApp.xcodeproj \
-            -scheme PiApp \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
-            test
+          for scheme in PiAI PiAgentCore PiTools PiSession PiExtensions; do
+            echo "--- Testing $scheme ---"
+            xcodebuild test \
+              -project PiApp/PiApp.xcodeproj \
+              -scheme "$scheme" \
+              -sdk iphonesimulator \
+              -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+              -only-testing:"${scheme}Tests" \
+              || exit 1
+          done
         working-directory: ios
