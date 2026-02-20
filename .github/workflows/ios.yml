@@ -21,6 +21,10 @@ jobs:
       - name: Build
         run: swift build
         working-directory: ios
+        env:
+          MACOSX_DEPLOYMENT_TARGET: '14.0'
       - name: Test
         run: swift test
         working-directory: ios
+        env:
+          MACOSX_DEPLOYMENT_TARGET: '14.0'
