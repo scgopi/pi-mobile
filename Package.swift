@@ -15,22 +15,22 @@ let package = Package(
         .package(url: "https://github.com/groue/GRDB.swift", from: "6.24.0"),
     ],
     targets: [
-        .target(name: "PiAI", path: "PiAI/Sources/PiAI"),
-        .target(name: "PiAgentCore", dependencies: ["PiAI"], path: "PiAgentCore/Sources/PiAgentCore"),
-        .target(name: "PiTools", dependencies: ["PiAgentCore"], path: "PiTools/Sources/PiTools"),
+        .target(name: "PiAI", path: "ios/PiAI/Sources/PiAI"),
+        .target(name: "PiAgentCore", dependencies: ["PiAI"], path: "ios/PiAgentCore/Sources/PiAgentCore"),
+        .target(name: "PiTools", dependencies: ["PiAgentCore"], path: "ios/PiTools/Sources/PiTools"),
         .target(
             name: "PiSession",
             dependencies: [
                 "PiAI",
                 .product(name: "GRDB", package: "GRDB.swift"),
             ],
-            path: "PiSession/Sources/PiSession"
+            path: "ios/PiSession/Sources/PiSession"
         ),
-        .target(name: "PiExtensions", dependencies: ["PiAgentCore"], path: "PiExtensions/Sources/PiExtensions"),
+        .target(name: "PiExtensions", dependencies: ["PiAgentCore"], path: "ios/PiExtensions/Sources/PiExtensions"),
 
-        .testTarget(name: "PiAITests", dependencies: ["PiAI"], path: "PiAI/Tests/PiAITests"),
-        .testTarget(name: "PiAgentCoreTests", dependencies: ["PiAgentCore", "PiAI"], path: "PiAgentCore/Tests/PiAgentCoreTests"),
-        .testTarget(name: "PiToolsTests", dependencies: ["PiTools", "PiAgentCore", "PiAI"], path: "PiTools/Tests/PiToolsTests"),
+        .testTarget(name: "PiAITests", dependencies: ["PiAI"], path: "ios/PiAI/Tests/PiAITests"),
+        .testTarget(name: "PiAgentCoreTests", dependencies: ["PiAgentCore", "PiAI"], path: "ios/PiAgentCore/Tests/PiAgentCoreTests"),
+        .testTarget(name: "PiToolsTests", dependencies: ["PiTools", "PiAgentCore", "PiAI"], path: "ios/PiTools/Tests/PiToolsTests"),
         .testTarget(
             name: "PiSessionTests",
             dependencies: [
@@ -38,8 +38,8 @@ let package = Package(
                 "PiAI",
                 .product(name: "GRDB", package: "GRDB.swift"),
             ],
-            path: "PiSession/Tests/PiSessionTests"
+            path: "ios/PiSession/Tests/PiSessionTests"
         ),
-        .testTarget(name: "PiExtensionsTests", dependencies: ["PiExtensions", "PiAgentCore", "PiAI"], path: "PiExtensions/Tests/PiExtensionsTests"),
+        .testTarget(name: "PiExtensionsTests", dependencies: ["PiExtensions", "PiAgentCore", "PiAI"], path: "ios/PiExtensions/Tests/PiExtensionsTests"),
     ]
 )

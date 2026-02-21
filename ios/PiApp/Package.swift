@@ -8,16 +8,18 @@ let package = Package(
         .library(name: "PiApp", targets: ["PiApp"]),
     ],
     dependencies: [
-        .package(path: "../PiAI"),
-        .package(path: "../PiAgentCore"),
-        .package(path: "../PiTools"),
-        .package(path: "../PiSession"),
-        .package(path: "../PiExtensions"),
+        .package(path: "../../"),
     ],
     targets: [
         .target(
             name: "PiApp",
-            dependencies: ["PiAI", "PiAgentCore", "PiTools", "PiSession", "PiExtensions"],
+            dependencies: [
+                .product(name: "PiAI", package: "PiMobile"),
+                .product(name: "PiAgentCore", package: "PiMobile"),
+                .product(name: "PiTools", package: "PiMobile"),
+                .product(name: "PiSession", package: "PiMobile"),
+                .product(name: "PiExtensions", package: "PiMobile"),
+            ],
             path: "PiApp"
         ),
         .testTarget(name: "PiAppTests", dependencies: ["PiApp"], path: "PiAppTests"),
