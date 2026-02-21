@@ -229,11 +229,7 @@
 			);
 			mainGroup = E10000;
 			packageReferences = (
-				SPMPKG001 /* XCLocalSwiftPackageReference "../PiAI" */,
-				SPMPKG002 /* XCLocalSwiftPackageReference "../PiAgentCore" */,
-				SPMPKG003 /* XCLocalSwiftPackageReference "../PiTools" */,
-				SPMPKG004 /* XCLocalSwiftPackageReference "../PiSession" */,
-				SPMPKG005 /* XCLocalSwiftPackageReference "../PiExtensions" */,
+				SPMPKG001 /* XCLocalSwiftPackageReference "../.." */,
 			);
 			productRefGroup = E10099 /* Products */;
 			projectDirPath = "";
@@ -480,52 +476,36 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		SPMPKG001 /* XCLocalSwiftPackageReference "../PiAI" */ = {
+		SPMPKG001 /* XCLocalSwiftPackageReference "../.." */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PiAI;
-		};
-		SPMPKG002 /* XCLocalSwiftPackageReference "../PiAgentCore" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PiAgentCore;
-		};
-		SPMPKG003 /* XCLocalSwiftPackageReference "../PiTools" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PiTools;
-		};
-		SPMPKG004 /* XCLocalSwiftPackageReference "../PiSession" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PiSession;
-		};
-		SPMPKG005 /* XCLocalSwiftPackageReference "../PiExtensions" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PiExtensions;
+			relativePath = ../..;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		SPMREF001 /* PiAI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = SPMPKG001 /* XCLocalSwiftPackageReference "../PiAI" */;
+			package = SPMPKG001 /* XCLocalSwiftPackageReference "../.." */;
 			productName = PiAI;
 		};
 		SPMREF002 /* PiAgentCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = SPMPKG002 /* XCLocalSwiftPackageReference "../PiAgentCore" */;
+			package = SPMPKG001 /* XCLocalSwiftPackageReference "../.." */;
 			productName = PiAgentCore;
 		};
 		SPMREF003 /* PiTools */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = SPMPKG003 /* XCLocalSwiftPackageReference "../PiTools" */;
+			package = SPMPKG001 /* XCLocalSwiftPackageReference "../.." */;
 			productName = PiTools;
 		};
 		SPMREF004 /* PiSession */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = SPMPKG004 /* XCLocalSwiftPackageReference "../PiSession" */;
+			package = SPMPKG001 /* XCLocalSwiftPackageReference "../.." */;
 			productName = PiSession;
 		};
 		SPMREF005 /* PiExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = SPMPKG005 /* XCLocalSwiftPackageReference "../PiExtensions" */;
+			package = SPMPKG001 /* XCLocalSwiftPackageReference "../.." */;
 			productName = PiExtensions;
 		};
 /* End XCSwiftPackageProductDependency section */

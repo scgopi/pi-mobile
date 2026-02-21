@@ -3,10 +3,10 @@ name: iOS CI
 on:
   push:
     branches: [main]
-    paths: ['ios/**', 'shared/**']
+    paths: ['ios/**', 'shared/**', 'Package.swift']
   pull_request:
     branches: [main]
-    paths: ['ios/**', 'shared/**']
+    paths: ['ios/**', 'shared/**', 'Package.swift']
 
 jobs:
   build:
@@ -24,4 +24,3 @@ jobs:
         working-directory: ios
       - name: Test
         run: swift test
-        working-directory: ios
