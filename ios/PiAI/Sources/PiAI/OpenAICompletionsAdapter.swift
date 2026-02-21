@@ -57,8 +57,24 @@ public struct OpenAICompletionsAdapter: ProtocolAdapter {
             body["temperature"] = .number(temp)
         }
         if let maxTokens = context.maxTokens {
-            body["max_tokens"] = .number(Double(maxTokens))
+            if model.capabilities.reasoning {
+                body["max_completion_tokens"] = .number(Double(maxTokens))
+            } else {
+                body["max_tokens"] = .number(Double(maxTokens))
+            }
         }
+
+        #if DEBUG
+        if let jsonData = try? JSONValue.object(body).toData(),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            let redacted = jsonString.replacingOccurrences(
+                of: "data:image\\/[^;]+;base64,[A-Za-z0-9+/=]+",
+                with: "<IMAGE_DATA_REDACTED>",
+                options: .regularExpression
+            )
+            logger.debug("[OpenAICompletions] Request body:\n\(redacted)")
+        }
+        #endif
 
         let jsonData = try JSONValue.object(body).toData()
         request.httpBody = jsonData
@@ -165,15 +181,36 @@ public struct OpenAICompletionsAdapter: ProtocolAdapter {
                 do {
                     var sseParser = SSELineParser()
                     var activeToolCalls: [Int: (id: String, name: String)] = [:]
+                    #if DEBUG
+                    var lineCount = 0
+                    var eventCount = 0
+                    #endif
 
                     for try await line in lines {
+                        #if DEBUG
+                        lineCount += 1
+                        if lineCount <= 20 || lineCount % 50 == 0 {
+                            let preview = line.count > 300 ? String(line.prefix(300)) + "..." : line
+                            logger.debug("[OpenAI] SSE line \(lineCount): \(preview)")
+                        }
+                        #endif
                         guard let sseEvent = sseParser.feedLine(line) else { continue }
                         let data = sseEvent.data
                         guard !data.isEmpty else { continue }
+                        #if DEBUG
+                        eventCount += 1
+                        let dataPreview = data.count > 500 ? String(data.prefix(500)) + "..." : data
+                        logger.debug("[OpenAI] SSE event \(eventCount): \(dataPreview)")
+                        #endif
 
                         guard let jsonData = data.data(using: .utf8),
                               let json = try? JSONDecoder().decode(JSONValue.self, from: jsonData)
-                        else { continue }
+                        else {
+                            #if DEBUG
+                            logger.warning("[OpenAI] Failed to parse JSON from SSE data: \(data.prefix(200))")
+                            #endif
+                            continue
+                        }
 
                         // Check for error
                         if let error = json["error"]?["message"]?.stringValue {
@@ -240,6 +277,10 @@ public struct OpenAICompletionsAdapter: ProtocolAdapter {
                             }
                         }
                     }
+
+                    #if DEBUG
+                    logger.debug("[OpenAI] Stream loop ended. Total lines=\(lineCount), events=\(eventCount)")
+                    #endif
 
                     // Flush remaining SSE buffer
                     if let remaining = sseParser.flush() {

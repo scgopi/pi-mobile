@@ -101,10 +101,31 @@ public struct SSELineParser {
         if trimmed.hasPrefix("data:") {
             let value = trimmed.dropFirst(5).trimmingCharacters(in: .init(charactersIn: " "))
             if value == "[DONE]" {
-                dataBuffer.removeAll()
-                currentEvent = nil
+                // Dispatch any buffered data before consuming [DONE].
+                // With AsyncLineSequence (no empty lines), the previous event
+                // may still be sitting in the buffer.
+                if !dataBuffer.isEmpty {
+                    let data = dataBuffer.joined(separator: "\n")
+                    let event = SSEEvent(event: currentEvent, data: data)
+                    dataBuffer.removeAll()
+                    currentEvent = nil
+                    if data == "[DONE]" { return nil }
+                    return event
+                }
                 return nil
             }
+
+            // If we already have buffered data, dispatch it before buffering the new line.
+            // AsyncLineSequence skips empty lines, so we can't rely on empty-line delimiters.
+            if !dataBuffer.isEmpty {
+                let data = dataBuffer.joined(separator: "\n")
+                let event = SSEEvent(event: currentEvent, data: data)
+                dataBuffer = [value]
+                currentEvent = nil
+                if data == "[DONE]" { return nil }
+                return event
+            }
+
             dataBuffer.append(value)
             return nil
         }

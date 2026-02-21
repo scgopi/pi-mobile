@@ -74,13 +74,21 @@ final class SSEParserTests: XCTestCase {
         XCTAssertNil(result2?.event)
     }
 
-    func testMultipleDataLinesConcatenated() {
+    func testConsecutiveDataLinesDispatchEagerly() {
+        // AsyncLineSequence skips empty lines, so consecutive data: lines
+        // trigger eager dispatch of the previous buffered data.
         var parser = SSELineParser()
-        _ = parser.feedLine("data: line1")
-        _ = parser.feedLine("data: line2")
-        let event = parser.feedLine("")
-        XCTAssertNotNil(event)
-        XCTAssertEqual(event?.data, "line1\nline2")
+        let result1 = parser.feedLine("data: line1")
+        XCTAssertNil(result1, "First data line should buffer")
+
+        let result2 = parser.feedLine("data: line2")
+        XCTAssertNotNil(result2, "Second data line should dispatch first")
+        XCTAssertEqual(result2?.data, "line1")
+
+        // line2 remains buffered
+        let flushed = parser.flush()
+        XCTAssertNotNil(flushed)
+        XCTAssertEqual(flushed?.data, "line2")
     }
 
     func testEventLineBeforeData() {
@@ -149,5 +157,74 @@ final class SSEParserTests: XCTestCase {
         XCTAssertNotNil(dispatched)
         XCTAssertEqual(dispatched?.event, "first")
         XCTAssertEqual(dispatched?.data, "data1")
+    }
+
+    // MARK: - AsyncLineSequence simulation (no empty lines)
+
+    func testNoEmptyLinesOpenAIStream() {
+        // Simulates AsyncLineSequence which skips empty lines.
+        // A typical OpenAI SSE stream without empty line delimiters:
+        //   data: {"choices":[{"delta":{"content":"Hello"}}]}
+        //   data: {"choices":[{"delta":{"content":" world"}}]}
+        //   data: [DONE]
+        var parser = SSELineParser()
+        let events = feedAllNoEmpty(parser: &parser, lines: [
+            "data: {\"choices\":[{\"delta\":{\"content\":\"Hello\"}}]}",
+            "data: {\"choices\":[{\"delta\":{\"content\":\" world\"}}]}",
+            "data: [DONE]",
+        ])
+        XCTAssertEqual(events.count, 2)
+        XCTAssertTrue(events[0].data.contains("Hello"))
+        XCTAssertTrue(events[1].data.contains("world"))
+    }
+
+    func testNoEmptyLinesWithEventPrefix() {
+        // Azure-style events with event: prefix, no empty lines
+        var parser = SSELineParser()
+        let events = feedAllNoEmpty(parser: &parser, lines: [
+            "event: message",
+            "data: {\"id\":\"1\"}",
+            "event: message",
+            "data: {\"id\":\"2\"}",
+        ])
+        // First event dispatched when second event: arrives
+        // Second event dispatched via flush
+        XCTAssertEqual(events.count, 2)
+        XCTAssertTrue(events[0].data.contains("\"1\""))
+        XCTAssertTrue(events[1].data.contains("\"2\""))
+    }
+
+    func testNewDataLineResetsCurrentEvent() {
+        // Verify currentEvent is reset after eager dispatch
+        var parser = SSELineParser()
+        _ = parser.feedLine("event: custom")
+        _ = parser.feedLine("data: first")
+        let dispatched = parser.feedLine("data: second")
+        XCTAssertNotNil(dispatched)
+        XCTAssertEqual(dispatched?.event, "custom")
+        XCTAssertEqual(dispatched?.data, "first")
+
+        // "second" is now buffered without an event name
+        let flushed = parser.flush()
+        XCTAssertNotNil(flushed)
+        XCTAssertNil(flushed?.event, "currentEvent should have been reset")
+        XCTAssertEqual(flushed?.data, "second")
+    }
+
+    // MARK: - Helpers
+
+    /// Feed lines without empty-line delimiters (simulating AsyncLineSequence),
+    /// then flush, returning all dispatched events.
+    private func feedAllNoEmpty(parser: inout SSELineParser, lines: [String]) -> [SSEEvent] {
+        var events: [SSEEvent] = []
+        for line in lines {
+            if let event = parser.feedLine(line) {
+                events.append(event)
+            }
+        }
+        if let remaining = parser.flush() {
+            events.append(remaining)
+        }
+        return events
     }
 }
