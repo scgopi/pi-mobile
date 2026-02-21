@@ -18,6 +18,9 @@ public final class LlmClient: Sendable {
         do {
             request = try adapter.buildRequest(context: context, model: model, apiKey: apiKey)
             logger.debug("[LlmClient] Request → \(request.httpMethod ?? "?") \(request.url?.absoluteString ?? "nil")")
+            #if DEBUG
+            logger.debug("[LlmClient] model=\(model.id), reasoning=\(model.capabilities.reasoning), maxTokens=\(String(describing: context.maxTokens)), temperature=\(String(describing: context.temperature))")
+            #endif
         } catch {
             logger.error("[LlmClient] Failed to build request: \(error.localizedDescription)")
             return AsyncThrowingStream { continuation in
